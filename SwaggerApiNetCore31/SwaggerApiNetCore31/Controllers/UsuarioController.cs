@@ -11,7 +11,14 @@ namespace SwaggerApiNetCore31.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
+        /// <summary>
+        /// Obter todos os usuários.
+        /// </summary>
+        /// <response code="200">A lista de usuários foi obtida com sucesso.</response>
+        /// <response code="500">Ocorreu um erro ao obter a lista de usuários.</response>
         [HttpGet]
+        [ProducesResponseType(typeof(List<UsuarioGetVm>), 200)]
+        [ProducesResponseType(500)]
         public IActionResult Get()
         {
             try
@@ -25,6 +32,13 @@ namespace SwaggerApiNetCore31.Controllers
             }
         }
 
+        /// <summary>
+        /// Obter um usuário específico por ID.
+        /// </summary>
+        /// <param name="id">ID do usuário.</param>
+        /// <response code="200">O usuário foi obtido com sucesso.</response>
+        /// <response code="404">Não foi encontrado usuário com ID especificado.</response>
+        /// <response code="500">Ocorreu um erro ao obter o usuário.</response>
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
@@ -44,6 +58,13 @@ namespace SwaggerApiNetCore31.Controllers
             }
         }
 
+        /// <summary>
+        /// Cadastrar usuário.
+        /// </summary>
+        /// <param name="usuario">Modelo do usuário.</param>
+        /// <response code="200">O usuário foi cadastrado com sucesso.</response>
+        /// <response code="400">O modelo do usuário enviado é inválido.</response>
+        /// <response code="500">Ocorreu um erro ao cadastrar o usuário.</response>
         [HttpPost]
         public IActionResult Post(UsuarioPostVm usuario)
         {
@@ -58,6 +79,15 @@ namespace SwaggerApiNetCore31.Controllers
             }
         }
 
+        /// <summary>
+        /// Alterar usuário.
+        /// </summary> 
+        /// <param name="id">ID do usuário.</param>
+        /// <param name="usuario">Modelo do usuário.</param>
+        /// <response code="200">O usuário foi alterado com sucesso.</response>
+        /// <response code="400">O modelo do usuário enviado é inválido.</response>
+        /// <response code="404">Não foi encontrado usuário com ID especificado.</response>
+        /// <response code="500">Ocorreu um erro ao alterar o usuário.</response>
         [HttpPut("{id}")]
         public IActionResult Put([FromRoute]Guid id, [FromBody] UsuarioPutVm usuario)
         {
@@ -79,6 +109,13 @@ namespace SwaggerApiNetCore31.Controllers
             }
         }
 
+        /// <summary>
+        /// Deletar usuário.
+        /// </summary>
+        /// <param name="id">ID do usuário.</param>
+        /// <response code="200">O usuário foi deletado com sucesso.</response>
+        /// <response code="404">Não foi encontrado usuário com ID especificado.</response>
+        /// <response code="500">Ocorreu um erro ao deletar o usuário.</response>
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {

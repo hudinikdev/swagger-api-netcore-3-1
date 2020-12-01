@@ -21,15 +21,8 @@ namespace SwaggerApiNetCore31.Controllers
         [ProducesResponseType(500)]
         public IActionResult Get()
         {
-            try
-            {
-                var usuarios = ObterUsuarios();
-                return Ok(usuarios);
-            }
-            catch (Exception)
-            {
-                return StatusCode((int)HttpStatusCode.InternalServerError);
-            }
+            var usuarios = ObterUsuarios();
+            return Ok(usuarios);
         }
 
         /// <summary>
@@ -42,20 +35,13 @@ namespace SwaggerApiNetCore31.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
-            try
-            {
-                var usuarios = ObterUsuarios();
-                var usuario = usuarios.FirstOrDefault(x => x.Id.Equals(id));
+            var usuarios = ObterUsuarios();
+            var usuario = usuarios.FirstOrDefault(x => x.Id.Equals(id));
 
-                if (usuario == null)
-                    return NotFound(new { message = "Usuário não encontrado." });
+            if (usuario == null)
+                return NotFound(new { message = "Usuário não encontrado." });
 
-                return Ok(usuario);
-            }
-            catch (Exception)
-            {
-                return StatusCode((int)HttpStatusCode.InternalServerError);
-            }
+            return Ok(usuario);
         }
 
         /// <summary>
@@ -139,6 +125,8 @@ namespace SwaggerApiNetCore31.Controllers
 
         private IEnumerable<UsuarioGetVm> ObterUsuarios()
         {
+            throw new Exception("Não foi possível buscar os usuários na base.");
+
             return new List<UsuarioGetVm>
             {
                 new UsuarioGetVm { Id = Guid.Parse("CAEF4812-598E-4473-8EFC-B338AF69A18F"), Name = "João", Email = "joao@outlook.com" },
